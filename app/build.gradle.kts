@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -79,4 +81,13 @@ dependencies {
 
     // StateFlow
     implementation (libs.kotlinx.coroutines.android)
+
+    //Dagger Hilt
+    implementation(libs.hilt.android.v245)
+    kapt(libs.hilt.android.compiler)
+    implementation (libs.androidx.hilt.navigation.compose.v110)
+}
+
+kapt {
+    correctErrorTypes = true
 }
