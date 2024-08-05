@@ -31,6 +31,21 @@ import com.celisdev.userauthdemo.ui.theme.BackgroundOnError
 import com.celisdev.userauthdemo.ui.theme.DividingLine
 import com.celisdev.userauthdemo.ui.theme.MontserratFontFamily
 
+/**
+ * Campo de texto personalizado para ingresar correo electrónico.
+ *
+ * Este campo de texto está diseñado específicamente para la entrada de correos electrónicos.
+ * Incluye un icono de correo electrónico y una línea vertical divisoria.
+ * Muestra un error en caso de que el valor ingresado no sea válido.
+ *
+ * @param value El valor actual del campo de texto. Este valor se muestra en el campo y se actualiza
+ *              cuando el usuario cambia el texto.
+ * @param isError Booleano que indica si el campo debe mostrarse con un estado de error. Si es `true`,
+ *                el campo de texto se mostrará con un color de fondo de error.
+ * @param onValueChange Función que se llama cuando el valor del campo de texto cambia. Se pasa el nuevo valor
+ *                      del campo de texto como argumento.
+ */
+
 @Composable
 fun CustomEmailTextField(value: String, isError: Boolean = false, onValueChange: (String) -> Unit) {
     TextField(

@@ -31,6 +31,21 @@ import com.celisdev.userauthdemo.ui.theme.BackgroundOnError
 import com.celisdev.userauthdemo.ui.theme.DividingLine
 import com.celisdev.userauthdemo.ui.theme.MontserratFontFamily
 
+/**
+ * Campo de texto personalizado para ingresar un número de teléfono.
+ *
+ * Este campo de texto está diseñado para la entrada de números de teléfono e incluye un icono de teléfono
+ * y una línea vertical divisoria. Configura el teclado para la entrada de números de teléfono y permite
+ * mostrar un estado de error si el valor ingresado no es válido.
+ *
+ * @param value El valor actual del campo de texto. Este valor se muestra en el campo y se actualiza
+ *              cuando el usuario cambia el texto.
+ * @param isError Booleano que indica si el campo debe mostrarse con un estado de error. Si es `true`,
+ *                el campo de texto se mostrará con un color de fondo de error.
+ * @param onValueChange Función que se llama cuando el valor del campo de texto cambia. Se pasa el nuevo valor
+ *                      del campo de texto como argumento.
+ */
+
 @Composable
 fun CustomPhoneTextField(value: String, isError: Boolean = false, onValueChange: (String) -> Unit) {
     TextField(

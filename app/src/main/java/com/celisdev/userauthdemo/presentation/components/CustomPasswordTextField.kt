@@ -39,6 +39,25 @@ import com.celisdev.userauthdemo.ui.theme.BackgroundOnError
 import com.celisdev.userauthdemo.ui.theme.DividingLine
 import com.celisdev.userauthdemo.ui.theme.MontserratFontFamily
 
+/**
+ * Campo de texto personalizado para ingresar una contraseña.
+ *
+ * Este campo de texto está diseñado específicamente para la entrada de contraseñas.
+ * Incluye un icono de contraseña, un botón para mostrar u ocultar la contraseña y una línea vertical divisoria.
+ * Configura el teclado para la entrada de contraseñas y permite ajustar la visibilidad del texto.
+ *
+ * @param value El valor actual del campo de texto. Este valor se muestra en el campo y se actualiza
+ *              cuando el usuario cambia el texto.
+ * @param text Texto del placeholder que se muestra cuando el campo está vacío. Por defecto, se usa
+ *             el placeholder definido en `Constants.PASSWORD_PLACEHOLDER`.
+ * @param isNext Booleano que indica si el campo debe tener una acción de IME "Next" o "Done". Si es `true`,
+ *               el teclado mostrará el botón "Next", de lo contrario, mostrará "Done".
+ * @param isError Booleano que indica si el campo debe mostrarse con un estado de error. Si es `true`,
+ *                el campo de texto se mostrará con un color de fondo de error.
+ * @param onValueChange Función que se llama cuando el valor del campo de texto cambia. Se pasa el nuevo valor
+ *                      del campo de texto como argumento.
+ */
+
 @Composable
 fun CustomPasswordTextField(
     value: String,

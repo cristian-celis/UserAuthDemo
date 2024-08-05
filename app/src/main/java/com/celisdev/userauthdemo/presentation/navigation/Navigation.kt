@@ -18,12 +18,20 @@ fun Navigation(
 ) {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Routes.LogIn.route){
-        composable(route = Routes.LogIn.route){
-            LogIn(modifier, scope, snackbarHostState, navController)
+    NavHost(navController = navController, startDestination = Routes.LogIn.route) {
+        composable(route = Routes.LogIn.route) {
+            LogIn(
+                modifier,
+                scope,
+                snackbarHostState,
+                navigate = { navController.navigate(route = Routes.SignUp.route) })
         }
-        composable(route = Routes.SignUp.route){
-            SignUp(modifier, scope, snackbarHostState, navController)
+        composable(route = Routes.SignUp.route) {
+            SignUp(
+                modifier,
+                scope,
+                snackbarHostState,
+                navigate = { navController.navigate(Routes.LogIn.route) })
         }
     }
 }
