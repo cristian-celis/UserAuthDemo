@@ -16,4 +16,12 @@ object ValidationUtils {
 
         return true
     }
+
+    fun isValidPhoneNumber(phoneNumber: String): Boolean {
+        return Patterns.PHONE.matcher(phoneNumber).matches()
+    }
+
+    fun validatePasswordsMatch(password: String, confirmPassword: String): Boolean{
+        return password == confirmPassword
+    }
 }

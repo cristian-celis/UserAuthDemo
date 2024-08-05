@@ -25,8 +25,10 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.celisdev.userauthdemo.core.Constants
 import com.celisdev.userauthdemo.ui.theme.Background
 import com.celisdev.userauthdemo.ui.theme.BackgroundOnError
+import com.celisdev.userauthdemo.ui.theme.DividingLine
 import com.celisdev.userauthdemo.ui.theme.MontserratFontFamily
 
 @Composable
@@ -38,7 +40,7 @@ fun CustomEmailTextField(value: String, isError: Boolean = false, onValueChange:
         modifier = Modifier.fillMaxWidth(),
         placeholder = {
             Text(
-                text = "Ingresar correo electrónico", style = TextStyle(
+                text = Constants.EMAIL_PLACEHOLDER, style = TextStyle(
                     fontFamily = MontserratFontFamily,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Medium,
@@ -54,7 +56,7 @@ fun CustomEmailTextField(value: String, isError: Boolean = false, onValueChange:
                 Spacer(modifier = Modifier.width(7.dp))
                 VerticalDivider(
                     modifier = Modifier.height(27.dp),
-                    color = Color.Blue
+                    color = DividingLine
                 )
             }
         },

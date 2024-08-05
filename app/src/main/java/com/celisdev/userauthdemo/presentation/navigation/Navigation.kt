@@ -12,6 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 
 @Composable
 fun Navigation(
+    modifier: Modifier = Modifier,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState
 ) {
@@ -19,10 +20,10 @@ fun Navigation(
 
     NavHost(navController = navController, startDestination = Routes.LogIn.route){
         composable(route = Routes.LogIn.route){
-            LogIn(scope, snackbarHostState, navController)
+            LogIn(modifier, scope, snackbarHostState, navController)
         }
         composable(route = Routes.SignUp.route){
-            SignUp(scope, snackbarHostState, navController)
+            SignUp(modifier, scope, snackbarHostState, navController)
         }
     }
 }

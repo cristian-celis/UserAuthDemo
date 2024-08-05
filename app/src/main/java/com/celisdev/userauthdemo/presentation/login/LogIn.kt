@@ -15,8 +15,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Mail
 import androidx.compose.material.icons.filled.Password
@@ -59,11 +61,13 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.celisdev.userauthdemo.R
+import com.celisdev.userauthdemo.core.Constants
 import com.celisdev.userauthdemo.presentation.components.CustomEmailTextField
 import com.celisdev.userauthdemo.presentation.components.CustomInputDescription
 import com.celisdev.userauthdemo.presentation.components.CustomPasswordTextField
 import com.celisdev.userauthdemo.presentation.components.ErrorMessage
 import com.celisdev.userauthdemo.presentation.navigation.Routes
+import com.celisdev.userauthdemo.ui.theme.DividingLine
 import com.celisdev.userauthdemo.ui.theme.MontserratFontFamily
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
@@ -72,6 +76,7 @@ import kotlin.math.log
 
 @Composable
 fun LogIn(
+    modifier: Modifier = Modifier,
     scope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
     navController: NavController,
@@ -83,9 +88,8 @@ fun LogIn(
     val focusManager = LocalFocusManager.current
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(start = 20.dp, end = 20.dp, top = 220.dp)
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
             .pointerInput(Unit) {
                 detectTapGestures(
                     onTap = { focusManager.clearFocus() }
@@ -93,33 +97,33 @@ fun LogIn(
             }
     ) {
         Text(
-            text = "Ingreso", style = MaterialTheme.typography.titleLarge
+            text = Constants.LOGIN_TITLE_TEXT, style = MaterialTheme.typography.titleLarge
         )
         HorizontalDivider(
             modifier = Modifier
                 .width(50.dp)
-                .padding(top = 7.dp, bottom = 30.dp), thickness = 1.5.dp, color = Color.Blue
+                .padding(top = 7.dp, bottom = 30.dp), thickness = 1.5.dp, color = DividingLine
         )
 
-        CustomInputDescription(text = "Correo electrónico")
+        CustomInputDescription(text = Constants.EMAIL_TEXT)
 
         CustomEmailTextField(value = loginState.email, isError = loginState.emailError) {
             viewModel.onEmailChange(it)
         }
 
         if (loginState.emailError)
-            ErrorMessage(text = "Correo inválido")
+            ErrorMessage(text = Constants.EMAIL_ERROR_TEXT)
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        CustomInputDescription(text = "Contraseña")
+        CustomInputDescription(text = Constants.PASSWORD_TEXT)
 
         CustomPasswordTextField(value = loginState.password, isError = loginState.passwordError) {
             viewModel.onPasswordChange(it)
         }
 
         if (loginState.passwordError)
-            ErrorMessage(text = "Contraseña incorrecta")
+            ErrorMessage(text = Constants.PASSWORD_ERROR_TEXT)
 
         Spacer(modifier = Modifier.height(10.dp))
 
@@ -131,26 +135,26 @@ fun LogIn(
             RememberCredentials(checked = rememberMe) {
                 viewModel.onRememberMeChange(it)
                 scope.launch {
-                    snackbarHostState.showSnackbar(if (rememberMe) "Se activó Recordar." else "Se desactivó Recordar.")
+                    snackbarHostState.showSnackbar(if (rememberMe) Constants.SNACKBAR_REMEMBER_ACTIVATED else Constants.SNACKBAR_REMEMBER_DEACTIVATED)
                 }
             }
 
             ForgotPassword() {
                 scope.launch {
-                    snackbarHostState.showSnackbar("Envía a resetear la Contraseña.")
+                    snackbarHostState.showSnackbar(Constants.SNACKBAR_RESET_PASSWORD)
                 }
             }
         }
-        Spacer(modifier = Modifier.height(27.dp))
+        Spacer(modifier = Modifier.height(23.dp))
 
         LogInButton {
             viewModel.onLogin()
             scope.launch {
-                snackbarHostState.showSnackbar("Se presionó el botón Ingresar.")
+                snackbarHostState.showSnackbar(Constants.SNACKBAR_LOGIN_BUTTON_PRESSED)
             }
         }
 
-        Spacer(modifier = Modifier.height(15.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         SignUpLink {
             navController.navigate(route = Routes.SignUp.route)
@@ -172,7 +176,7 @@ private fun LogInButton(
         shape = RoundedCornerShape(15.dp)
     ) {
         Text(
-            text = "Ingresar",
+            text = Constants.LOGIN_BUTTON_TEXT,
             modifier = Modifier.padding(5.dp),
             style = MaterialTheme.typography.labelLarge,
             color = Color.White,
@@ -194,7 +198,7 @@ private fun RememberCredentials(
             }
         )
         Text(
-            text = "Recordarme",
+            text = Constants.REMEMBER_ME,
             style = MaterialTheme.typography.labelSmall,
             color = Color(0xFF2F2E2E),
             fontWeight = FontWeight.Medium,
@@ -208,7 +212,7 @@ private fun ForgotPassword(onClick: () -> Unit) {
         onClick()
     }) {
         Text(
-            text = "Contraseña olvidada?", style = MaterialTheme.typography.labelSmall,
+            text = Constants.FORGOT_PASSWORD, style = MaterialTheme.typography.labelSmall,
             fontWeight = FontWeight.SemiBold
         )
     }
@@ -222,14 +226,14 @@ private fun SignUpLink(modifier: Modifier = Modifier, onClick: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = "Ya tienes una cuenta?",
+            text = Constants.NO_ACCOUNT_PROMPT,
             style = MaterialTheme.typography.labelSmall,
             color = Color(0xFF2F2E2E),
             fontWeight = FontWeight.SemiBold,
         )
         TextButton(onClick = { onClick() }) {
             Text(
-                text = "Registrarse",
+                text = Constants.REGISTER_BUTTON_TEXT,
                 style = MaterialTheme.typography.labelSmall,
                 fontWeight = FontWeight.SemiBold
             )

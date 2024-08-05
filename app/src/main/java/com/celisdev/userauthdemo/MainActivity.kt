@@ -17,6 +17,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import com.celisdev.userauthdemo.presentation.navigation.Navigation
 import com.celisdev.userauthdemo.ui.theme.UserAuthDemoTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,10 +49,16 @@ class MainActivity : ComponentActivity() {
                         Image(
                             painter = painterResource(id = R.drawable.background),
                             contentDescription = null,
-                            contentScale = ContentScale.Crop,
+                            contentScale = ContentScale.FillBounds,
                             modifier = Modifier.fillMaxSize()
                         )
-                        Navigation(scope = scope, snackbarHostState = snackbarHostState)
+                        Navigation(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(start = 20.dp, end = 20.dp, top = 170.dp),
+                            scope = scope,
+                            snackbarHostState = snackbarHostState
+                        )
                     }
                 }
             }
