@@ -1,6 +1,6 @@
 # Proyecto UI Design
 
-Este proyecto es una aplicación móvil demostrativa desarrollada con Kotlin y Jetpack Compose. 
+Este proyecto es una aplicación móvil demostrativa desarrollada con Kotlin, Jetpack Compose, minSdk 24 y targetSdk 34.
 
 ## Descripción del Proyecto
 
